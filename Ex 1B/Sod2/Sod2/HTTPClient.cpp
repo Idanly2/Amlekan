@@ -3,6 +3,7 @@
 #include "windows.h"
 #include "winhttp.h"
 #include "HTTPAutoHandle.h"
+#include "Win32Exception.h"
 
 
 HTTPClient::HTTPClient(LPCWSTR pswzServerName, INTERNET_PORT nServerPort)
@@ -15,13 +16,21 @@ HTTPClient::HTTPClient(LPCWSTR pswzServerName, INTERNET_PORT nServerPort)
 	HTTPAutoHandle sessionHandle = HTTPAutoHandle(hSession);
 
 	// Specify an HTTP server.
-	if (hSession)
+	if (!hSession)
+	{
+		throw Win32Exception(GetLastError());
+	} 
+	else
 	{
 		hConnect = WinHttpConnect(hSession, L"localhost",
 			INTERNET_DEFAULT_HTTP_PORT, 0);
 		HTTPAutoHandle connectHandle = HTTPAutoHandle(hConnect);
+	}	
+
+	if (!hConnect)
+	{
+		throw Win32Exception(GetLastError());
 	}
-	
 }
 
 
