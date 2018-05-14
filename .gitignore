@@ -138,3 +138,6 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+
+/Ex 1B/Sod2/.vs/

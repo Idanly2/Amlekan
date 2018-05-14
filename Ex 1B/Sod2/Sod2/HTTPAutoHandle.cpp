@@ -1,8 +1,5 @@
 #include "stdafx.h"
 #include "HTTPAutoHandle.h"
-#include "windows.h"
-#include "winhttp.h"
-
 
 HTTPAutoHandle::HTTPAutoHandle(HINTERNET h): h(h) 
 {
